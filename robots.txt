@@ -1,0 +1,12 @@
+# robots.txt for دارالقرآن حاج ملا علی عقیلی
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /private/
+
+# Sitemap location
+Sitemap: https://oaexam8-lgtm.github.io/dar-al-quran-haj-molla-ali-aghili-kosge/sitemap.xml
+
+# Crawl-delay for better server performance
+Crawl-delay: 1

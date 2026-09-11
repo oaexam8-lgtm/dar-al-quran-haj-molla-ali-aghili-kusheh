@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Homepage -->
+  <url>
+    <loc>https://oaexam8-lgtm.github.io/dar-al-quran-haj-molla-ali-aghili-kosge/</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://oaexam8-lgtm.github.io/dar-al-quran-haj-molla-ali-aghili-kosge/logo.svg</image:loc>
+      <image:title>لوگوی دارالقرآن حاج ملا علی عقیلی</image:title>
+      <image:caption>مکتب قرآن کریم در کوشه، قشم</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Contact Section -->
+  <url>
+    <loc>https://oaexam8-lgtm.github.io/dar-al-quran-haj-molla-ali-aghili-kosge/#contact</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Location Section -->
+  <url>
+    <loc>https://oaexam8-lgtm.github.io/dar-al-quran-haj-molla-ali-aghili-kosge/#location</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+</urlset>
