@@ -4,12 +4,12 @@
   
   <!-- Homepage -->
   <url>
-    <loc>https://oaexam8-lgtm.github.io/dar-al-quran-haj-molla-ali-aghili-kosge/</loc>
+    <loc>https://candid-tartufo-415deb.netlify.app/</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://oaexam8-lgtm.github.io/dar-al-quran-haj-molla-ali-aghili-kosge/logo.svg</image:loc>
+      <image:loc>https://candid-tartufo-415deb.netlify.app/logo.svg</image:loc>
       <image:title>لوگوی دارالقرآن حاج ملا علی عقیلی</image:title>
       <image:caption>مکتب قرآن کریم در کوشه، قشم</image:caption>
     </image:image>
@@ -17,7 +17,7 @@
 
   <!-- Contact Section -->
   <url>
-    <loc>https://oaexam8-lgtm.github.io/dar-al-quran-haj-molla-ali-aghili-kosge/#contact</loc>
+    <loc>https://candid-tartufo-415deb.netlify.app/#contact</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -25,7 +25,7 @@
 
   <!-- Location Section -->
   <url>
-    <loc>https://oaexam8-lgtm.github.io/dar-al-quran-haj-molla-ali-aghili-kosge/#location</loc>
+    <loc>https://candid-tartufo-415deb.netlify.app/#location</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
