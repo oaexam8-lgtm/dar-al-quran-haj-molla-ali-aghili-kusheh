@@ -6,7 +6,7 @@ Disallow: /admin/
 Disallow: /private/
 
 # Sitemap location
-Sitemap: https://candid-tartufo-415deb.netlify.app/sitemap.xml
+Sitemap: https://oaexam8-lgtm.github.io/dar-al-quran-haj-molla-ali-aghili-kusheh/sitemap.xml
 
 # Crawl-delay for better server performance
 Crawl-delay: 1

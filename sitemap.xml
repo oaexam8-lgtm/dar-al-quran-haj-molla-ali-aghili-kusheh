@@ -4,12 +4,12 @@
   
   <!-- Homepage -->
   <url>
-    <loc>https://candid-tartufo-415deb.netlify.app/</loc>
-    <lastmod>2026-09-11</lastmod>
+    <loc>https://oaexam8-lgtm.github.io/dar-al-quran-haj-molla-ali-aghili-kusheh/</loc>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://candid-tartufo-415deb.netlify.app/logo.svg</image:loc>
+      <image:loc>https://oaexam8-lgtm.github.io/dar-al-quran-haj-molla-ali-aghili-kusheh/logo.svg</image:loc>
       <image:title>لوگوی دارالقرآن حاج ملا علی عقیلی</image:title>
       <image:caption>مکتب قرآن کریم در کوشه، قشم</image:caption>
     </image:image>
@@ -17,16 +17,16 @@
 
   <!-- Contact Section -->
   <url>
-    <loc>https://candid-tartufo-415deb.netlify.app/#contact</loc>
-    <lastmod>2026-09-11</lastmod>
+    <loc>https://oaexam8-lgtm.github.io/dar-al-quran-haj-molla-ali-aghili-kusheh/#contact</loc>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <!-- Location Section -->
   <url>
-    <loc>https://candid-tartufo-415deb.netlify.app/#location</loc>
-    <lastmod>2026-09-11</lastmod>
+    <loc>https://oaexam8-lgtm.github.io/dar-al-quran-haj-molla-ali-aghili-kusheh/#location</loc>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
