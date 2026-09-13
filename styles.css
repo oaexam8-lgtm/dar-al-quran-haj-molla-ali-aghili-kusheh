@@ -6,13 +6,13 @@
 }
 
 :root {
-    /* Colors - Light Theme (Default) */
-    --primary-color: #6366f1;
-    --secondary-color: #8b5cf6;
-    --accent-color: #ec4899;
+    /* Colors - Light Theme (Default) - Navy & Gold Palette */
+    --primary-color: #1B365D;
+    --secondary-color: #C99A47;
+    --accent-color: #E6C17A;
     --bg-primary: #f8fafc;
     --bg-secondary: #e2e8f0;
-    --text-primary: #0f172a;
+    --text-primary: #0D1B2A;
     --text-secondary: #475569;
     --glass-bg: rgba(255, 255, 255, 0.7);
     --glass-border: rgba(0, 0, 0, 0.1);
@@ -22,10 +22,10 @@
     --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.15);
     --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.2);
     
-    /* Gradients */
-    --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-    --gradient-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    /* Gradients - Navy & Gold */
+    --gradient-primary: linear-gradient(135deg, #1B365D 0%, #0D1B2A 100%);
+    --gradient-secondary: linear-gradient(135deg, #C99A47 0%, #E6C17A 100%);
+    --gradient-accent: linear-gradient(135deg, #1B365D 0%, #C99A47 100%);
 }
 
 body {
@@ -34,6 +34,31 @@ body {
     color: var(--text-primary);
     overflow-x: hidden;
     line-height: 1.6;
+    position: relative;
+}
+
+/* لوگو به عنوان بک‌گراند ملایم صفحه */
+body::before {
+    content: '';
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background-image: url('logo-background.svg');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.08;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* تغییر رنگ لوگوی بک‌گراند در تم تاریک */
+body.dark-theme::before {
+    filter: brightness(0) invert(1);
+    opacity: 0.12;
 }
 
 /* ===== Background Decorations ===== */
@@ -56,22 +81,11 @@ body {
 }
 
 .decoration-2 {
-    width: 400px;
-    height: 400px;
-    background: var(--gradient-secondary);
-    bottom: -150px;
-    left: -150px;
-    animation: float 15s ease-in-out infinite reverse;
+    display: none;
 }
 
 .decoration-3 {
-    width: 350px;
-    height: 350px;
-    background: var(--gradient-accent);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    animation: pulse 10s ease-in-out infinite;
+    display: none;
 }
 
 @keyframes float {
@@ -95,12 +109,13 @@ body {
     flex-direction: row;
     gap: 15px;
     z-index: 1000;
-    background: var(--glass-bg);
-    backdrop-filter: blur(20px);
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(30px) saturate(180%);
+    -webkit-backdrop-filter: blur(30px) saturate(180%);
     padding: 15px 25px;
     border-radius: 50px;
-    border: 1px solid var(--glass-border);
-    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
     align-items: center;
 }
 
@@ -136,7 +151,7 @@ body.dark-theme .card-logo {
     border-radius: 50%;
     cursor: pointer;
     transition: all 0.3s ease;
-    color: var(--text-secondary);
+    color: #C99A47;
     font-size: 18px;
     background: transparent;
     border: none;
@@ -145,14 +160,14 @@ body.dark-theme .card-logo {
 
 .nav-item:hover {
     background: var(--glass-bg);
-    color: var(--text-primary);
+    color: #E6C17A;
     transform: scale(1.1);
 }
 
 .nav-item.active {
     background: var(--gradient-primary);
     color: white;
-    box-shadow: 0 5px 15px rgba(102, 102, 241, 0.4);
+    box-shadow: 0 5px 15px rgba(27, 54, 93, 0.4);
 }
 
 .nav-divider {
@@ -188,10 +203,7 @@ body.dark-theme .card-logo {
     font-size: clamp(2rem, 5vw, 3.5rem);
     font-weight: 700;
     margin-bottom: 15px;
-    background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary-color) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--text-primary);
     line-height: 1.3;
 }
 
@@ -202,7 +214,7 @@ body.dark-theme .card-logo {
 .location-badge {
     font-size: 0.5em;
     font-weight: 500;
-    background: linear-gradient(135deg, #ec4899 0%, #f97316 100%);
+    background: linear-gradient(135deg, #C99A47 0%, #E6C17A 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -256,12 +268,13 @@ body.dark-theme .card-logo {
 
 /* ===== Glass Card Base ===== */
 .glass-card {
-    background: var(--glass-bg);
-    backdrop-filter: blur(20px);
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(30px) saturate(180%);
+    -webkit-backdrop-filter: blur(30px) saturate(180%);
     border-radius: 25px;
     padding: 20px;
-    border: 1px solid var(--glass-border);
-    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
@@ -275,8 +288,8 @@ body.dark-theme .card-logo {
     right: 0;
     bottom: 0;
     border-radius: 25px;
-    padding: 3px;
-    background: var(--gradient-primary);
+    padding: 2px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.1) 100%);
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
@@ -287,7 +300,9 @@ body.dark-theme .card-logo {
 
 .glass-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 15px 40px rgba(27, 54, 93, 0.25);
+    background: rgba(255, 255, 255, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 .glass-card:hover::before {
@@ -391,23 +406,24 @@ body.dark-theme .card-logo {
     align-items: center;
     gap: 12px;
     padding: 12px;
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
     border-radius: 15px;
-    border: 1px solid var(--glass-border);
+    border: 1px solid rgba(255, 255, 255, 0.25);
     text-decoration: none;
     color: var(--text-primary);
     transition: all 0.3s ease;
 }
 
 .contact-item:hover {
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.25);
     transform: translateX(-3px);
 }
 
 .contact-icon {
     width: 40px;
     height: 40px;
-    background: var(--gradient-primary);
+    background: var(--gradient-secondary);
     border-radius: 12px;
     display: flex;
     align-items: center;
@@ -450,9 +466,10 @@ body.dark-theme .card-logo {
     align-items: center;
     gap: 12px;
     padding: 12px;
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
     border-radius: 15px;
-    border: 1px solid var(--glass-border);
+    border: 1px solid rgba(255, 255, 255, 0.25);
     text-decoration: none;
     color: var(--text-primary);
     transition: all 0.3s ease;
@@ -460,7 +477,7 @@ body.dark-theme .card-logo {
 }
 
 .social-item:hover {
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.25);
     transform: translateX(-3px);
 }
 
@@ -533,15 +550,16 @@ body.dark-theme .card-logo {
     align-items: flex-start;
     gap: 10px;
     padding: 12px;
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
     border-radius: 15px;
-    border: 1px solid var(--glass-border);
+    border: 1px solid rgba(255, 255, 255, 0.25);
     margin-bottom: 12px;
 }
 
 .address i {
     font-size: 1.2rem;
-    color: #ec4899;
+    color: #C99A47;
     margin-top: 3px;
 }
 
@@ -570,7 +588,7 @@ body.dark-theme .card-logo {
 
 .map-button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(102, 102, 241, 0.4);
+    box-shadow: 0 10px 30px rgba(27, 54, 93, 0.4);
 }
 
 .map-container {
@@ -691,8 +709,43 @@ body.dark-theme {
     --glass-border: rgba(255, 255, 255, 0.1);
 }
 
+/* افکت شیشه‌ای در تم تاریک */
+body.dark-theme .glass-card {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(30px) saturate(180%);
+    -webkit-backdrop-filter: blur(30px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+}
+
+body.dark-theme .glass-card:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-theme .sidebar {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(30px) saturate(180%);
+    -webkit-backdrop-filter: blur(30px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+}
+
 body.dark-theme .bg-decoration {
     opacity: 0.3;
+}
+
+/* رنگ متن stats در تم تاریک */
+body.dark-theme .stat-number {
+    background: linear-gradient(135deg, #60a5fa 0%, #93c5fd 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+body.dark-theme .stat-label {
+    color: #cbd5e1;
 }
 
 .bg-decoration {
@@ -707,7 +760,7 @@ body.dark-theme .bg-decoration {
     }
     50% {
         transform: translateY(-8px) scale(1.02);
-        box-shadow: 0 20px 60px rgba(102, 102, 241, 0.4);
+        box-shadow: 0 20px 60px rgba(27, 54, 93, 0.4);
     }
     100% {
         transform: translateY(-5px) scale(1);
