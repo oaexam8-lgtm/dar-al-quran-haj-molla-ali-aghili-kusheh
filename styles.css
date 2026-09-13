@@ -785,3 +785,112 @@ body.dark-theme .stat-label {
     opacity: 1 !important;
     animation: borderGlow 1.5s ease-in-out;
 }
+
+/* ===== Enhanced AOS Animations ===== */
+[data-aos="fade-up"] {
+    opacity: 0;
+    transform: translateY(50px);
+    transition-property: transform, opacity;
+}
+
+[data-aos="fade-up"].aos-animate {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* افکت ورودی سلسله‌مراتبی برای باکس‌ها */
+.glass-card {
+    will-change: transform, opacity;
+    transform: translateY(0);
+}
+
+/* انیمیشن هاور پیشرفته */
+.glass-card {
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.glass-card:hover {
+    transform: translateY(-8px) scale(1.02);
+}
+
+/* افکت ریپل برای دکمه‌ها */
+.nav-item {
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-item::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.nav-item:active::after {
+    width: 100px;
+    height: 100px;
+}
+
+/* بهبود انیمیشن‌های موجود */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* انیمیشن برای آیتم‌های داخل باکس‌ها */
+.contact-item,
+.social-item {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.contact-item:hover,
+.social-item:hover {
+    transform: translateX(-5px) scale(1.02);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* افکت شاین روی باکس‌ها */
+.glass-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    bottom: -50%;
+    left: -50%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 100%);
+    transform: translateX(-100%) rotate(45deg);
+    transition: transform 0.6s;
+}
+
+.glass-card:hover::after {
+    transform: translateX(100%) rotate(45deg);
+}
+
+/* Smooth entrance for page elements */
+.hero-content,
+.cards-container {
+    animation-fill-mode: both;
+}
+
+/* استایل برای بهبود عملکرد انیمیشن */
+.glass-card,
+.nav-item,
+.contact-item,
+.social-item {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+}

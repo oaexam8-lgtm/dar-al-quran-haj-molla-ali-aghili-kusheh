@@ -1,11 +1,18 @@
 // ===== Initialization =====
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize AOS (Animate On Scroll)
+    // Initialize AOS (Animate On Scroll) with enhanced settings
     AOS.init({
         duration: 800,
-        easing: 'ease-out',
+        easing: 'ease-out-cubic',
         once: true,
-        offset: 100
+        offset: 80,
+        delay: 0,
+        anchorPlacement: 'top-bottom',
+        disable: false,
+        startEvent: 'DOMContentLoaded',
+        disableMutationObserver: false,
+        throttleDelay: 99,
+        debounceDelay: 50
     });
 
     // Initialize theme
