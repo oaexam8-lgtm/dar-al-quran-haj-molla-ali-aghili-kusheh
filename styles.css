@@ -50,7 +50,7 @@ body::before {
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    opacity: 0.08;
+    opacity: 0.025;
     z-index: 0;
     pointer-events: none;
 }
@@ -58,7 +58,7 @@ body::before {
 /* تغییر رنگ لوگوی بک‌گراند در تم تاریک */
 body.dark-theme::before {
     filter: brightness(0) invert(1);
-    opacity: 0.12;
+    opacity: 0.04;
 }
 
 /* ===== Background Decorations ===== */
@@ -115,7 +115,8 @@ body.dark-theme::before {
     padding: 15px 25px;
     border-radius: 50px;
     border: 1px solid rgba(255, 255, 255, 0.4);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.25),
+                0 4px 16px 0 rgba(0, 0, 0, 0.12);
     align-items: center;
 }
 
@@ -274,7 +275,8 @@ body.dark-theme .card-logo {
     border-radius: 25px;
     padding: 20px;
     border: 1px solid rgba(255, 255, 255, 0.4);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.25), 
+                0 4px 16px 0 rgba(0, 0, 0, 0.12);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
@@ -300,7 +302,8 @@ body.dark-theme .card-logo {
 
 .glass-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(27, 54, 93, 0.25);
+    box-shadow: 0 15px 40px rgba(27, 54, 93, 0.3), 
+                0 8px 24px 0 rgba(0, 0, 0, 0.15);
     background: rgba(255, 255, 255, 0.35);
     border: 1px solid rgba(255, 255, 255, 0.5);
 }
@@ -1025,7 +1028,7 @@ body.dark-theme .footer-copyright i {
 }
 
 .developer-link:hover i {
-    transform: scale(1.1) rotate(360deg);
+    transform: scale(1.1);
 }
 
 .developer-name {
