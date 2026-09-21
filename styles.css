@@ -5,6 +5,55 @@
     box-sizing: border-box;
 }
 
+/* ===== SVG Icon Styles ===== */
+.icon {
+    width: 1.2em;
+    height: 1.2em;
+    display: inline-block;
+    vertical-align: middle;
+    fill: currentColor;
+    flex-shrink: 0;
+}
+
+.nav-item .icon {
+    width: 18px;
+    height: 18px;
+}
+
+.contact-icon .icon,
+.social-icon .icon {
+    width: 20px;
+    height: 20px;
+    fill: white;
+}
+
+.map-button .icon {
+    width: 18px;
+    height: 18px;
+    fill: white;
+}
+
+.address .icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+.social-arrow.icon {
+    width: 16px;
+    height: 16px;
+}
+
+.footer-copyright .icon {
+    width: 16px;
+    height: 16px;
+}
+
+.developer-link .icon {
+    width: 20px;
+    height: 20px;
+}
+
 :root {
     /* Colors - Light Theme (Default) - Navy & Gold Palette */
     --primary-color: #1B365D;
@@ -789,22 +838,26 @@ body.dark-theme .stat-label {
     animation: borderGlow 1.5s ease-in-out;
 }
 
-/* ===== Enhanced AOS Animations ===== */
-[data-aos="fade-up"] {
+/* ===== Scroll Animations ===== */
+.fade-in-up {
     opacity: 0;
-    transform: translateY(50px);
-    transition-property: transform, opacity;
+    transform: translateY(30px);
+    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-[data-aos="fade-up"].aos-animate {
+.fade-in-up.visible {
     opacity: 1;
     transform: translateY(0);
 }
 
-/* افکت ورودی سلسله‌مراتبی برای باکس‌ها */
-.glass-card {
+/* بهینه‌سازی عملکرد انیمیشن */
+.fade-in-up {
     will-change: transform, opacity;
-    transform: translateY(0);
+}
+
+.fade-in-up.visible {
+    will-change: auto;
 }
 
 /* انیمیشن هاور پیشرفته */

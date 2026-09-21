@@ -1,61 +1,46 @@
 // ===== Initialization =====
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize AOS (Animate On Scroll) with enhanced settings
-    AOS.init({
-        duration: 800,
-        easing: 'ease-out-cubic',
-        once: true,
-        offset: 80,
-        delay: 0,
-        anchorPlacement: 'top-bottom',
-        disable: false,
-        startEvent: 'DOMContentLoaded',
-        disableMutationObserver: false,
-        throttleDelay: 99,
-        debounceDelay: 50
-    });
-
     // Initialize theme
     initTheme();
     
     // Setup event listeners
     setupEventListeners();
     
-    // Add smooth reveal animation on load
-    setTimeout(() => {
-        document.body.style.opacity = '1';
-    }, 100);
+    // Initialize Intersection Observer for animations
+    initScrollAnimations();
 });
 
 // ===== Theme Toggle =====
 function initTheme() {
     const themeToggle = document.querySelector('.theme-toggle');
-    const icon = themeToggle.querySelector('i');
+    const icon = themeToggle.querySelector('svg');
     const savedTheme = localStorage.getItem('theme');
     
     // اگر تم ذخیره نشده یا روشن است، آیکون ماه نمایش داده شود
     if (!savedTheme || savedTheme === 'light') {
         // تم روشن است - آیکون ماه نمایش داده می‌شود
         document.body.classList.remove('dark-theme');
-        icon.className = 'fas fa-moon';
+        icon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
     } else {
         // تم تاریک است - آیکون خورشید نمایش داده می‌شود
         document.body.classList.add('dark-theme');
-        icon.className = 'fas fa-sun';
+        icon.innerHTML = '<path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58a1.001 1.001 0 00-1.41 0 .996.996 0 000 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37a1.001 1.001 0 00-1.41 0 .996.996 0 000 1.41l1.06 1.06c.39.39 1.03.39 1.41 0a.996.996 0 000-1.41l-1.06-1.06zm1.06-10.96a.996.996 0 000-1.41.996.996 0 00-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36a.996.996 0 000-1.41.996.996 0 00-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/>';
     }
 }
 
 function toggleTheme() {
     const themeToggle = document.querySelector('.theme-toggle');
-    const icon = themeToggle.querySelector('i');
+    const icon = themeToggle.querySelector('svg');
     
     document.body.classList.toggle('dark-theme');
     
     if (document.body.classList.contains('dark-theme')) {
-        icon.classList.replace('fa-moon', 'fa-sun');
+        // تغییر به آیکون خورشید
+        icon.innerHTML = '<path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58a1.001 1.001 0 00-1.41 0 .996.996 0 000 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37a1.001 1.001 0 00-1.41 0 .996.996 0 000 1.41l1.06 1.06c.39.39 1.03.39 1.41 0a.996.996 0 000-1.41l-1.06-1.06zm1.06-10.96a.996.996 0 000-1.41.996.996 0 00-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36a.996.996 0 000-1.41.996.996 0 00-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/>';
         localStorage.setItem('theme', 'dark');
     } else {
-        icon.classList.replace('fa-sun', 'fa-moon');
+        // تغییر به آیکون ماه
+        icon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
         localStorage.setItem('theme', 'light');
     }
     
@@ -215,27 +200,27 @@ function updateActiveNav() {
     // Navigation update logic removed - not needed anymore
 }
 
-// ===== Intersection Observer for Cards =====
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
+// ===== Scroll Animations with Intersection Observer =====
+function initScrollAnimations() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-        }
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target); // توقف مشاهده بعد از نمایش
+            }
+        });
+    }, observerOptions);
+
+    // مشاهده تمام المان‌های fade-in-up
+    document.querySelectorAll('.fade-in-up').forEach(element => {
+        observer.observe(element);
     });
-}, observerOptions);
-
-document.querySelectorAll('.glass-card').forEach(card => {
-    card.style.opacity = '0';
-    card.style.transform = 'translateY(20px)';
-    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(card);
-});
+}
 
 // ===== Cursor Trail Effect (Optional) =====
 let cursorTrail = [];
