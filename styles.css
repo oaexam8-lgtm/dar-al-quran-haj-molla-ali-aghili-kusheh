@@ -154,14 +154,6 @@ body.dark-theme::before {
     animation: float 20s ease-in-out infinite;
 }
 
-.decoration-2 {
-    display: none;
-}
-
-.decoration-3 {
-    display: none;
-}
-
 @keyframes float {
     0%, 100% { transform: translate(0, 0) rotate(0deg); }
     33% { transform: translate(30px, -30px) rotate(120deg); }
