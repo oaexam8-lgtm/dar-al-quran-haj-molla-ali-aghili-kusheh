@@ -1,17 +1,29 @@
 // ===== Initialization =====
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialize theme
+// استفاده از رویداد سبک‌تر برای بهبود سرعت
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+} else {
+    init();
+}
+
+function init() {
+    // Initialize theme (critical - باید سریع اجرا شود)
     initTheme();
     
-    // Setup event listeners
+    // Setup event listeners (critical)
     setupEventListeners();
     
-    // Initialize Intersection Observer for animations
-    initScrollAnimations();
-    
-    // Initialize lazy loading for Google Maps
-    initLazyMap();
-});
+    // Non-critical - با تاخیر برای بهبود FCP
+    requestIdleCallback ? 
+        requestIdleCallback(() => {
+            initScrollAnimations();
+            initLazyMap();
+        }) : 
+        setTimeout(() => {
+            initScrollAnimations();
+            initLazyMap();
+        }, 100);
+}
 
 // ===== Theme Toggle =====
 function initTheme() {
@@ -68,12 +80,6 @@ function setupEventListeners() {
         item.addEventListener('click', () => handleNavClick(item));
     });
     
-    // FAB button
-    const fabButton = document.querySelector('.fab-button');
-    if (fabButton) {
-        fabButton.addEventListener('click', handleFabClick);
-    }
-    
     // Smooth scroll for internal links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
@@ -85,12 +91,28 @@ function setupEventListeners() {
         });
     });
     
-    // Add hover effect to cards
-    const cards = document.querySelectorAll('.glass-card');
-    cards.forEach(card => {
-        card.addEventListener('mouseenter', (e) => handleCardHover(e, true));
-        card.addEventListener('mouseleave', (e) => handleCardHover(e, false));
-        card.addEventListener('mousemove', (e) => handleCardMouseMove(e));
+    // استفاده از passive listeners برای بهبود scroll performance
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                handleScroll();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }, { passive: true });
+}
+
+// ===== Scroll Handler (بهینه شده) =====
+function handleScroll() {
+    const currentScroll = window.pageYOffset;
+    
+    // Parallax effect با throttle
+    const decorations = document.querySelectorAll('.bg-decoration');
+    decorations.forEach((decoration, index) => {
+        const speed = (index + 1) * 0.5;
+        decoration.style.transform = `translateY(${currentScroll * speed}px)`;
     });
 }
 
@@ -135,16 +157,12 @@ function handleFabClick() {
 
 // ===== Card Hover Effects =====
 function handleCardHover(e, isEntering) {
-    const card = e.currentTarget;
-    
     if (isEntering) {
-        card.style.transition = 'transform 0.3s ease';
+        e.currentTarget.style.transition = 'transform 0.3s ease';
     }
 }
 
-function handleCardMouseMove(e) {
-    // Removed 3D effect - too much movement
-}
+// توابع اضافی حذف شده برای بهبود عملکرد
 
 // ===== Ripple Effect =====
 function createRipple(element) {
@@ -182,23 +200,6 @@ style.textContent = `
 document.head.appendChild(style);
 
 // ===== Scroll Animations =====
-let lastScroll = 0;
-window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
-    
-    // Update active nav based on scroll position
-    updateActiveNav();
-    
-    // Parallax effect for decorations
-    const decorations = document.querySelectorAll('.bg-decoration');
-    decorations.forEach((decoration, index) => {
-        const speed = (index + 1) * 0.5;
-        decoration.style.transform = `translateY(${currentScroll * speed}px)`;
-    });
-    
-    lastScroll = currentScroll;
-});
-
 function updateActiveNav() {
     // Navigation update logic removed - not needed anymore
 }
@@ -282,77 +283,11 @@ function initLazyMap() {
     observer.observe(mapContainer);
 }
 
-// ===== Cursor Trail Effect (Optional) =====
-let cursorTrail = [];
-const trailLength = 20;
-
-document.addEventListener('mousemove', (e) => {
-    cursorTrail.push({ x: e.clientX, y: e.clientY, time: Date.now() });
-    
-    if (cursorTrail.length > trailLength) {
-        cursorTrail.shift();
-    }
-});
-
-// ===== Copy to Clipboard Function =====
-function copyToClipboard(text) {
-    navigator.clipboard.writeText(text).then(() => {
-        showNotification('کپی شد!');
-    }).catch(err => {
-        console.error('خطا در کپی کردن:', err);
-    });
-}
-
-// ===== Notification System =====
-function showNotification(message) {
-    const notification = document.createElement('div');
-    notification.textContent = message;
-    notification.style.cssText = `
-        position: fixed;
-        top: 20px;
-        left: 50%;
-        transform: translateX(-50%) translateY(-100px);
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        padding: 15px 30px;
-        border-radius: 50px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        z-index: 10000;
-        font-weight: 500;
-        transition: transform 0.3s ease;
-    `;
-    
-    document.body.appendChild(notification);
-    
-    setTimeout(() => {
-        notification.style.transform = 'translateX(-50%) translateY(0)';
-    }, 100);
-    
-    setTimeout(() => {
-        notification.style.transform = 'translateX(-50%) translateY(-100px)';
-        setTimeout(() => notification.remove(), 300);
-    }, 2000);
-}
-
 // ===== Performance Optimization =====
-// Debounce function for scroll events
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
+// Debounce حذف شد - از requestAnimationFrame استفاده می‌کنیم
+
+// ===== Development Only - حذف در production =====
+if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+    console.log('%c🕌 دارالقرآن حاج ملا علی عقیلی', 'font-size: 20px; font-weight: bold; color: #667eea;');
+    console.log('%cطراحی و توسعه با ❤️', 'font-size: 14px; color: #8b5cf6;');
 }
-
-// Apply debounce to scroll handler
-window.addEventListener('scroll', debounce(() => {
-    updateActiveNav();
-}, 100));
-
-// ===== Console Message =====
-console.log('%c🕌 دارالقرآن حاج ملا علی عقیلی', 'font-size: 20px; font-weight: bold; color: #667eea;');
-console.log('%cطراحی و توسعه با ❤️', 'font-size: 14px; color: #8b5cf6;');

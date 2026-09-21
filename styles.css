@@ -1,8 +1,15 @@
-/* ===== Reset & Base Styles ===== */
+/* ===== Base Styles - Mobile First ===== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+html {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-size-adjust: 100%;
 }
 
 /* ===== Local Font Definitions ===== */
@@ -109,6 +116,9 @@ body {
     overflow-x: hidden;
     line-height: 1.6;
     position: relative;
+    min-height: 100vh;
+    /* بهینه‌سازی rendering موبایل */
+    -webkit-overflow-scrolling: touch;
 }
 
 /* لوگو به عنوان بک‌گراند ملایم صفحه */
@@ -346,6 +356,9 @@ body.dark-theme .card-logo {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
+    /* بهینه‌سازی hardware acceleration */
+    will-change: transform;
+    transform: translateZ(0);
 }
 
 .glass-card::before {
