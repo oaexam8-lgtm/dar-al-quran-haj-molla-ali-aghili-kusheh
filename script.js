@@ -8,6 +8,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize Intersection Observer for animations
     initScrollAnimations();
+    
+    // Initialize lazy loading for Google Maps
+    initLazyMap();
 });
 
 // ===== Theme Toggle =====
@@ -220,6 +223,63 @@ function initScrollAnimations() {
     document.querySelectorAll('.fade-in-up').forEach(element => {
         observer.observe(element);
     });
+}
+
+// ===== Lazy Load Google Maps =====
+function initLazyMap() {
+    const mapContainer = document.querySelector('.map-container');
+    const mapPlaceholder = document.querySelector('.map-placeholder');
+    
+    if (!mapContainer || !mapPlaceholder) return;
+    
+    let mapLoaded = false;
+    
+    // تابع بارگذاری نقشه
+    function loadMap() {
+        if (mapLoaded) return;
+        mapLoaded = true;
+        
+        const mapSrc = mapPlaceholder.getAttribute('data-map-src');
+        mapContainer.setAttribute('data-map-loading', 'true');
+        
+        // ساخت iframe
+        const iframe = document.createElement('iframe');
+        iframe.src = mapSrc;
+        iframe.style.border = '0';
+        iframe.setAttribute('allowfullscreen', '');
+        iframe.setAttribute('loading', 'lazy');
+        iframe.setAttribute('title', 'موقعیت دارالقرآن حاج ملا علی عقیلی در نقشه');
+        
+        // بعد از بارگذاری iframe، حذف placeholder
+        iframe.onload = function() {
+            mapPlaceholder.style.opacity = '0';
+            setTimeout(() => {
+                mapPlaceholder.remove();
+                mapContainer.setAttribute('data-map-loading', 'false');
+            }, 300);
+        };
+        
+        mapContainer.appendChild(iframe);
+    }
+    
+    // بارگذاری با کلیک
+    mapPlaceholder.addEventListener('click', loadMap);
+    
+    // بارگذاری خودکار وقتی کاربر به بخش نقشه رسید
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // تاخیر 500ms برای بهبود تجربه کاربری
+                setTimeout(loadMap, 500);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.25,
+        rootMargin: '50px'
+    });
+    
+    observer.observe(mapContainer);
 }
 
 // ===== Cursor Trail Effect (Optional) =====

@@ -649,11 +649,98 @@ body.dark-theme .card-logo {
     border-radius: 18px;
     overflow: hidden;
     border: 1px solid var(--glass-border);
+    position: relative;
 }
 
 .map-container iframe {
     width: 100%;
     height: 100%;
+    border: 0;
+}
+
+/* Map Placeholder Styles */
+.map-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(27, 54, 93, 0.05) 0%, rgba(201, 154, 71, 0.05) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.map-placeholder::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 10px,
+            rgba(0, 0, 0, 0.02) 10px,
+            rgba(0, 0, 0, 0.02) 11px
+        ),
+        repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 10px,
+            rgba(0, 0, 0, 0.02) 10px,
+            rgba(0, 0, 0, 0.02) 11px
+        );
+    opacity: 0.5;
+}
+
+.map-placeholder:hover {
+    background: linear-gradient(135deg, rgba(27, 54, 93, 0.1) 0%, rgba(201, 154, 71, 0.1) 100%);
+}
+
+.map-loading-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    z-index: 1;
+}
+
+.map-icon {
+    width: 48px;
+    height: 48px;
+    color: var(--primary-color);
+    animation: mapPulse 2s ease-in-out infinite;
+}
+
+body.dark-theme .map-icon {
+    color: #60a5fa;
+}
+
+.map-loading-content p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+@keyframes mapPulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+}
+
+/* Loading state */
+.map-container[data-map-loading="true"] .map-placeholder {
+    background: linear-gradient(135deg, rgba(27, 54, 93, 0.15) 0%, rgba(201, 154, 71, 0.15) 100%);
+}
+
+.map-container[data-map-loading="true"] .map-loading-content p::after {
+    content: '...';
+    animation: loadingDots 1.5s infinite;
+}
+
+@keyframes loadingDots {
+    0%, 20% { content: '.'; }
+    40% { content: '..'; }
+    60%, 100% { content: '...'; }
 }
 
 /* ===== Animations ===== */
